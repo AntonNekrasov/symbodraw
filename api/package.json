@@ -1,0 +1,28 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "description": "symbodraw api part",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonNekrasov/symbodraw.git"
+  },
+  "keywords": [
+    "symbodraw",
+    "node",
+    "koa",
+    "es6"
+  ],
+  "author": "Anton Nekrasov",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/AntonNekrasov/symbodraw/issues"
+  },
+  "homepage": "https://github.com/AntonNekrasov/symbodraw#readme",
+  "dependencies": {
+    "koa": "^2.4.1"
+  }
+}
