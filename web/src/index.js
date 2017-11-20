@@ -1,21 +1,17 @@
+import { updatePoints, clear } from "./draw";
 import "./index.scss";
 
 let isDrawing = false;
-let points = {
-  x: [],
-  y: [],
-  moves: []
-};
 
 const pane = document.getElementById("pane");
 
 pane.addEventListener("mousedown", function (event) {
   isDrawing = true;
-  drawSomething.call(this, event);
+  updatePoints.call(this, event, pane);
 });
 
 pane.addEventListener("mousemove", function (event) {
-  if (isDrawing) drawSomething.call(this, event, true);
+  if (isDrawing) updatePoints.call(this, event, pane, true);
 });
 
 pane.addEventListener("mouseup", function () {
@@ -26,46 +22,4 @@ pane.addEventListener("mouseleave", function () {
   isDrawing = false;
 });
 
-const addPoint = (x, y, isMoving) => {
-  points.x.push(x);
-  points.y.push(y);
-  points.moves.push(isMoving);
-};
-
-function drawSomething(event, isMoving = false) {
-  const position = getPosition.call(this, event);
-  const {x, y} = position;
-  addPoint(x, y, isMoving);
-  reflow();
-}
-
-function getPosition(event) {
-  const x = event.pageX - this.offsetLeft;
-  const y = event.pageY - this.offsetTop;
-
-  return {x, y};
-}
-
-const reflow = () => {
-  const context = pane.getContext("2d");
-  const {width, height} = context.canvas;
-  context.clearRect(0, 0, width, height);
-
-  context.strokeStyle = "#df4b26";
-  context.lineJoin = "round";
-  context.lineWidth = 2;
-
-  const {x, y, moves} = points;
-
-  for (let i = 0, length = x.length; i < length; i++) {
-    context.beginPath();
-    if (moves[i] && i) {
-      context.moveTo(x[i - 1], y[i - 1]);
-    } else {
-      context.moveTo(x[i] - 1, y[i]);
-    }
-    context.lineTo(x[i], y[i]);
-    context.closePath();
-    context.stroke();
-  }
-};
+document.querySelector("#clear").addEventListener("click", () => clear(pane));
