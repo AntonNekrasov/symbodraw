@@ -15,7 +15,7 @@ pane.addEventListener("mousedown", function (event) {
 });
 
 pane.addEventListener("mousemove", function (event) {
-  if(isDrawing) drawSomething.call(this, event);
+  if (isDrawing) drawSomething.call(this, event, true);
 });
 
 pane.addEventListener("mouseup", function () {
@@ -32,10 +32,10 @@ const addPoint = (x, y, isMoving) => {
   points.moves.push(isMoving);
 };
 
-function drawSomething(event) {
+function drawSomething(event, isMoving = false) {
   const position = getPosition.call(this, event);
-  const { x, y } = position;
-  addPoint(x, y, true);
+  const {x, y} = position;
+  addPoint(x, y, isMoving);
   reflow();
 }
 
@@ -43,25 +43,25 @@ function getPosition(event) {
   const x = event.pageX - this.offsetLeft;
   const y = event.pageY - this.offsetTop;
 
-  return { x, y };
+  return {x, y};
 }
 
 const reflow = () => {
   const context = pane.getContext("2d");
-  const { width, height } = context.canvas;
+  const {width, height} = context.canvas;
   context.clearRect(0, 0, width, height);
 
   context.strokeStyle = "#df4b26";
   context.lineJoin = "round";
-  context.lineWidth = 5;
+  context.lineWidth = 2;
 
-  const { x, y, moves } = points;
+  const {x, y, moves} = points;
 
-  for(let i = 0, length = x.length; i < length; i++) {
+  for (let i = 0, length = x.length; i < length; i++) {
     context.beginPath();
-    if(moves[i] && i){
+    if (moves[i] && i) {
       context.moveTo(x[i - 1], y[i - 1]);
-    }else{
+    } else {
       context.moveTo(x[i] - 1, y[i]);
     }
     context.lineTo(x[i], y[i]);
