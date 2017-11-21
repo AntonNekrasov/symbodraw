@@ -4,6 +4,7 @@
   "description": "symbodraw api part",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +24,9 @@
   },
   "homepage": "https://github.com/AntonNekrasov/symbodraw#readme",
   "dependencies": {
-    "koa": "^2.4.1"
+    "config": "^1.28.1",
+    "koa": "^2.4.1",
+    "koa-favicon": "^2.0.0",
+    "koa-logger": "^3.1.0"
   }
 }
